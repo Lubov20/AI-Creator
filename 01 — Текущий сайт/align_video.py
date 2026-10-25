@@ -1,0 +1,18 @@
+from pathlib import Path
+p=Path('dist/app.js');s=p.read_text(encoding='utf8')
+s=s.replace("i===1?'#ff37b1'","i===1?'#b183c2'").replace("new THREE.PointLight('#ff39b7',45,30)","new THREE.PointLight('#ac89c9',24,30)")
+s=s.replace('8+i*1.8,Math.cos(a)*3.5','-8-i*1.8,Math.cos(a)*3.5')
+s=s.replace('academy.position.y=23','academy.position.y=-23')
+s=s.replace('cage.position.set(0,20.1,0)','cage.position.set(0,-20.1,0)')
+s=s.replace('water.position.y=21.25','water.position.y=-21.25')
+s=s.replace('lerp(.75,8,rise)','lerp(.75,-8,rise)').replace('cy=8+focus*1.8','cy=-8-focus*1.8').replace('cy=lerp(17,23,ap)','cy=lerp(-17,-23,ap)')
+s=s.replace('w.spine.rotation.y=Math.sin(t*.12)*.065+(screenPointer.x-.5)*.09;','w.spine.rotation.y=.62+Math.sin(t*.12)*.06+(screenPointer.x-.5)*.09;')
+s=s.replace('detail={host,r,effect,scene,camera,root,u,cosmos};','cosmos.material.uniforms.opacity.value=.12;detail={host,r,effect,scene,camera,root,u,cosmos};')
+s=s.replace("tones=['#697a75','#716979','#766f65','#63757c','#69766b','#795f72']","tones=['#24332e','#282b3f','#302939','#173436','#283631','#382b32']")
+s=s.replace("g.addColorStop(.65,'#293c3d');g.addColorStop(1,'#1b242b')","g.addColorStop(.65,'#14242c');g.addColorStop(1,'#101921')")
+# Low contrast cloud and central text instead of the brighter plain panels.
+s=s.replace('opacity:{value:.84}','opacity:{value:.86}')
+p.write_text(s,encoding='utf8')
+p=Path('dist/index.html');s=p.read_text(encoding='utf8').replace('</p></dialog>','</p></dialog>',1)
+s=s.replace('Здесь появятся способы связи с Любовью.</p>','Здесь появятся способы связи с Любовью.</p><p class="model-credit"><a href="./assets/anatomy/CREDITS.txt" target="_blank" rel="noopener">3D-модель: BodyParts3D / DBCLS · CC BY-SA 2.1 JP</a></p>')
+p.write_text(s,encoding='utf8')
