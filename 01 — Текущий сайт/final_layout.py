@@ -1,9 +1,0 @@
-from pathlib import Path
-p=Path('dist/index.html');s=p.read_text(encoding='utf8');a=s.index('<label for="message">');b=s.index('</dialog>',a);s=s[:a]+s[b:];s=s.replace('Пока можно подготовить и скопировать обращение.','Здесь появятся способы связи с Любовью.');p.write_text(s,encoding='utf8')
-p=Path('dist/app.js');s=p.read_text(encoding='utf8');a=s.index("$('#copy-message').onclick=");b=s.index("addEventListener('resize'",a);s=s[:a]+s[b:];s=s.replace("function requestClose(){projectTarget=1;closingByScroll=true;if(reduced)finishClose()}","function requestClose(){if(!detail||reduced){finishClose();return}projectTarget=1;closingByScroll=true}")
-p.write_text(s,encoding='utf8')
-p=Path('dist/style.css');s=p.read_text(encoding='utf8')+'''
-/* Academy stays in the observed 3D environment instead of introducing another page layout. */
-#academy{inset:0;width:100%;height:100svh;max-height:none;margin:0;border:0;border-radius:0;box-shadow:none;background:transparent;padding:0;overflow:hidden}#academy::backdrop{background:#080e1022;backdrop-filter:none}body:has(#academy[open]) #academy-copy{visibility:hidden}#academy .close{position:absolute;left:4.5%;bottom:17%;margin:0}#academy .academy-label{position:absolute;left:4.5%;bottom:49%}#academy h2{position:absolute;left:4.5%;bottom:37%;font-size:25px;margin:0}#academy>p{position:absolute;left:4.5%;bottom:28%;font-size:9px}#academy .empty-material{position:absolute;left:4.5%;bottom:21%;width:310px;max-width:80%;padding:13px 0;margin:0;font-size:8px}#contact{border:0;border-radius:0;box-shadow:none;background:#080e10f5}#contact::backdrop{backdrop-filter:none;background:#080e1099}
-@media(max-width:600px){#academy .close,#academy .academy-label,#academy h2,#academy>p,#academy .empty-material{left:6%}#academy h2{font-size:23px;bottom:35%}#academy .academy-label{bottom:46%}#academy>p{bottom:27%;font-size:8px}#academy .empty-material{width:280px;font-size:7px;bottom:20%}}
-''';p.write_text(s,encoding='utf8')
