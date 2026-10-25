@@ -1,0 +1,10 @@
+const overlay=document.querySelector('#loader'),canvas=document.createElement('canvas'),ctx=canvas.getContext('2d'),reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;overlay.replaceChildren(canvas);let start=performance.now(),finished=false,ready=false,w=innerWidth,h=innerHeight,scale=Math.min(devicePixelRatio,1.5);canvas.width=w*scale;canvas.height=h*scale;canvas.style.width='100%';canvas.style.height='100%';ctx.scale(scale,scale);
+let resolveReady;export const loaderReady=new Promise(resolve=>resolveReady=resolve);
+const dots=Array.from({length:270},(_,i)=>({a:i*2.39996,r:Math.sqrt((i+.5)/270),phase:i*.53}));
+function draw(now){if(finished)return;const t=(now-start)/1000;ctx.clearRect(0,0,w,h);ctx.fillStyle='#030607';ctx.fillRect(0,0,w,h);const cx=w*.5,cy=h*.55;const unfold=Math.min(1,Math.max(0,(t-.65)/.85)),settle=Math.min(1,Math.max(0,(t-1.65)/.6));const radius=32+unfold*27-settle*10;
+ ctx.save();ctx.translate(cx,cy);for(let i=0;i<dots.length;i++){const d=dots[i],a=d.a+t*.17,r=d.r*radius;const x=Math.cos(a)*r,y=Math.sin(a)*r*.85;ctx.fillStyle=`rgba(${i%4===0?'239,110,196':'169,202,203'},${(.2+.5*Math.sin(t*2+d.phase)**2)*(1-settle*.85)})`;ctx.fillRect(x,y,1.1,1.1)}
+ for(let j=0;j<3;j++){ctx.beginPath();for(let k=0;k<=260;k++){let a=k/260*Math.PI*2,r=radius+10+j*13+Math.sin(a*8+t*.8+j)*unfold*(14+j*4);r*=1-settle*.22;let x=Math.cos(a)*r,y=Math.sin(a)*r;if(k===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.strokeStyle=`rgba(${j%2?'247,126,209':'134,180,197'},${unfold*(1-settle)*.35})`;ctx.lineWidth=.65;ctx.stroke()}
+ ctx.beginPath();ctx.arc(0,0,radius,0,Math.PI*2);ctx.strokeStyle=`rgba(222,171,213,${.2+settle*.45})`;ctx.lineWidth=.8;ctx.stroke();ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`${13+settle*4}px monospace`;ctx.fillStyle=`rgba(202,215,211,${.2+settle*.7})`;ctx.fillText('LV',0,1);ctx.restore();
+ if(t>2.3&&!ready){ready=true;resolveReady()}requestAnimationFrame(draw)}
+if(reduced){ready=true;resolveReady()}else requestAnimationFrame(draw);
+export function finishLoader(){finished=true;overlay.classList.add('done');setTimeout(()=>{canvas.remove()},800)}

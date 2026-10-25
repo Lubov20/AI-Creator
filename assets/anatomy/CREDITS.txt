@@ -1,0 +1,9 @@
+BodyParts3D, (c) The Database Center for Life Science (DBCLS)
+Licensed under Creative Commons Attribution-Share Alike 2.1 Japan.
+License: https://creativecommons.org/licenses/by-sa/2.1/jp/
+Original data and license: https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html
+Geometry distribution: https://github.com/olivercase/body_parts_3d_api
+Original geometry files are provided alongside this notice, unchanged.
+Changes in the LV scene: rotation, normalization, repeated arrangement and iridescent glass material.
+These transformed anatomical model components remain available under CC BY-SA 2.1 Japan.
+The surrounding website code and user content are separate from the licensed model data.
